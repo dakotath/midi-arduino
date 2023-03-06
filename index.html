@@ -171,7 +171,7 @@
         }
         // Write an M300 to play a note with the calculated pitch and duration
         gcode.push(
-          `  tone(11, ${Math.round(frequency)}, ${Math.round(trimmedDuration * 1000 * tempoMultiplier)});\n  delay(${Math.round(trimmedDuration * 1000 * tempoMultiplier)});\n`
+          `  tone(${Math.round(frequency)}, ${Math.round(trimmedDuration * 1000 * tempoMultiplier)});\n  delay(${Math.round(trimmedDuration * 1000 * tempoMultiplier)});\n`
         );
 
         // Duet firmware needs G4 pauses between notes
@@ -189,7 +189,7 @@
         // If the current note is released before the start of the next note, insert a pause
         if (pauseDuration >= minDuration) {
           gcode.push(
-            `  delay(${Math.round(pauseDuration * tempoMultiplier * 1000)});\n`
+            `  //delay(${Math.round(pauseDuration * tempoMultiplier * 1000)});\n`
           );
           if (useG4) {
             gcode.push(
